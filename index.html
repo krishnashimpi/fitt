@@ -1,86 +1,72 @@
-/* General Styles */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: linear-gradient(136deg, #c3f5ff, #fad0c4); /* Linear gradient background */
-  link rel="stylesheet" href="style.css"
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitCheck</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Interface 1: App Icon and Name -->
+  <div id="interface1" class="interface active">
+    <div class="center-content">
+      <h1>FitCheck</h1>
+      <p class="quote">Be STRONGER than your EXCUSES..!!</p>
+      <button onclick="nextInterface()">Start</button>
+    </div>
+  </div>
 
-.interface {
-  display: none;
-  text-align: center;
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 90%;
-  max-width: 400px;
-}
+  <!-- Interface 2: Gender Selection -->
+  <div id="interface2" class="interface">
+    <div class="center-content">
+      <h2>Select Your Gender</h2>
+      <div class="gender-icons">
+        <img src="male-icon.png" alt="Male" onclick="selectGender('male')">
+        <img src="female-icon.png" alt="Female" onclick="selectGender('female')">
+      </div>
+    </div>
+  </div>
 
-.interface.active {
-  display: block;
-}
+  <!-- Interface 3: Date of Birth -->
+  <div id="interface3" class="interface">
+    <div class="center-content">
+      <h2>Enter Your Date of Birth</h2>
+      <input type="date" id="dob" required>
+      <img src="aging.png" alt="Aging icon" class="aging-image">
+      <button onclick="nextInterface()">Next</button>
+    </div>
+  </div>
 
-.center-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+  <!-- Interface 4: Weight and Height -->
+  <div id="interface4" class="interface">
+    <div class="center-content">
+      <h2>Enter Your Weight and Height</h2>
+      <input type="number" id="weight" placeholder="Weight (kg)" required>
+      <input type="number" id="height" placeholder="Height (cm)" required>
+      <button onclick="nextInterface()">Next</button>
+    </div>
+  </div>
 
-h1 {
-  font-size: 2.5rem;
-  color: #333;
-}
+  <!-- Interface 5: Weight and Height Difference -->
+  <div id="interface5" class="interface">
+    <div class="center-content">
+      <h2>Your Progress</h2>
+      <p id="weightDifference"></p>
+      <p id="heightDifference"></p>
+      <button onclick="calculateDifference(); nextInterface();">Next</button>
+    </div>
+  </div>
 
-.quote {
-  font-size: 1rem;
-  color: #666;
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-}
+  <!-- Interface 6: Daily Routine -->
+  <div id="interface6" class="interface">
+    <div class="center-content">
+      <h2>Your Daily Routine</h2>
+      <div id="mealPlan"></div>
+      <button onclick="generateMealPlan()">Generate Meal Plan</button>
+    </div>
+  </div>
 
-.gender-icons img {
-  width: 80px;
-  margin: 10px;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
+  <script src="script.js"></script>
+</body>
+</html>
 
-.gender-icons img:hover {
-  transform: scale(1.1); /* Add hover effect */
-}
-
-input {
-  margin: 10px 0;
-  padding: 10px;
-  width: 80%;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-/* Aging image styling */
-.aging-image {
-  width: 100px;
-  margin-top: 20px;
-}
