@@ -1,110 +1,85 @@
-let currentInterface = 1;
-let userData = {
-  gender: null,
-  dob: null,
-  weight: null,
-  height: null,
-};
-
-// Function to switch between interfaces
-function nextInterface() {
-  const currentElement = document.getElementById(interface${currentInterface});
-  const nextElement = document.getElementById(interface${currentInterface + 1});
-  
-  if (currentElement && nextElement) {
-    currentElement.classList.remove('active');
-    currentInterface++;
-    nextElement.classList.add('active');
-  } else {
-    console.error("Invalid interface transition");
-  }
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(136deg, #c3f5ff, #fad0c4); /* Linear gradient background */
 }
 
-// Function to select gender
-function selectGender(gender) {
-  if (gender === 'male' || gender === 'female') {
-    userData.gender = gender;
-    nextInterface();
-  } else {
-    console.error("Invalid gender selection");
-  }
+.interface {
+  display: none;
+  text-align: center;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 400px;
 }
 
-// Function to calculate weight and height difference
-function calculateDifference() {
-  if (!userData.weight || !userData.height || !userData.gender) {
-    console.error("Missing user data for calculation");
-    return;
-  }
-  
-  const idealWeight = userData.gender === 'male' ? 70 : 60; // Example ideal weights
-  const idealHeight = userData.gender === 'male' ? 175 : 165; // Example ideal heights
-
-  const weightDiff = userData.weight - idealWeight;
-  const heightDiff = userData.height - idealHeight;
-
-  const weightDiffElement = document.getElementById('weightDifference');
-  const heightDiffElement = document.getElementById('heightDifference');
-  
-  if (weightDiffElement && heightDiffElement) {
-    weightDiffElement.textContent = Weight Difference: ${weightDiff} kg;
-    heightDiffElement.textContent = Height Difference: ${heightDiff} cm;
-  } else {
-    console.error("Weight/Height difference elements not found");
-  }
+.interface.active {
+  display: block;
 }
 
-// Function to generate meal plan
-function generateMealPlan() {
-  const mealPlanElement = document.getElementById('mealPlan');
-  if (!mealPlanElement) {
-    console.error("Meal plan element not found");
-    return;
-  }
-  
-  const mealPlan = `
-    <h3>Breakfast</h3>
-    <p>8:00 AM - 1 cup oatmeal cooked in 2 cups water+1/2 cup raspberries+1 Tbsp. chopped walnuts+1 hard-boiled egg+Top oatmeal with raspberries, walnuts and a pinch of cinnamon.
-</p>
-    <h3>Mid-Day Meal</h3>
-    <p>11:00 AM - 1 medium apple+2 Tbsp. peanut butter
-</p>
-    <h3>Lunch</h3>
-    <p>1:00 PM - 1 serving Whole-Wheat Veggie Wrap+1 banana</p>
-    <h3>Evening Snack</h3>
-    <p>4:00 PM - 1 cup nonfat plain Greek yogurt+1/2 cup sliced strawberries+1 Tbsp. chia seeds
-</p>
-    <h3>Dinner</h3>
-    <p>7:00 PM - 1 serving Mushroom-Quinoa Veggie Burgers with Special Sauce+1 serving Basic Green Salad with Vinaigrette</p>
-  `;
-  mealPlanElement.innerHTML = mealPlan;
+.center-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-// Event listeners for input fields
-document.getElementById('dob')?.addEventListener('change', (e) => {
-  userData.dob = e.target.value;
-});
+h1 {
+  font-size: 2.5rem;
+  color: #333;
+}
 
-document.getElementById('weight')?.addEventListener('input', (e) => {
-  const weight = parseFloat(e.target.value);
-  if (!isNaN(weight) && weight > 0) {
-    userData.weight = weight;
-  } else {
-    console.error("Invalid weight input");
-  }
-});
+.quote {
+  font-size: 1rem;
+  color: #666;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
 
-document.getElementById('height')?.addEventListener('input', (e) => {
-  const height = parseFloat(e.target.value);
-  if (!isNaN(height) && height > 0) {
-    userData.height = height;
-  } else {
-    console.error("Invalid height input");
-  }
-});
+.gender-icons img {
+  width: 80px;
+  margin: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
 
-// Final step: Show meal plan
-document.getElementById('interface5')?.querySelector('button')?.addEventListener('click', () => {
-  calculateDifference();
-  generateMealPlan();
-});
+.gender-icons img:hover {
+  transform: scale(1.1); /* Add hover effect */
+}
+
+input {
+  margin: 10px 0;
+  padding: 10px;
+  width: 80%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Aging image styling */
+.aging-image {
+  width: 100px;
+  margin-top: 20px;
+}
